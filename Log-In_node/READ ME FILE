@@ -1,0 +1,15 @@
+{npm init -y}
+this code will install json files
+
+{npm install express body-parser pg bcryptjs ejs}
+his will install basic modules for authentification
+
+express → web framework to handle routes (app.get, app.post etc).
+
+body-parser → reads form data (req.body.username, req.body.password).
+
+pg → PostgreSQL client to connect Node.js ↔ PostgreSQL.
+
+bcryptjs → to hash & verify passwords securely.
+
+ejs → template engine (renders HTML with <%= %>).
