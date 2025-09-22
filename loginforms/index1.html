@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In / Sign Up</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(45deg, #f3f4f6, #e5e7eb);
+        }
+
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #1f2937;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 5px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            border-color: #3b82f6;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 5px;
+            background: #3b82f6;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #2563eb;
+        }
+
+        .social-login {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 5px;
+            background: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: background 0.3s;
+        }
+
+        .social-btn:hover {
+            background: #f3f4f6;
+        }
+
+        .toggle {
+            text-align: center;
+            margin-top: 1rem;
+            color: #374151;
+        }
+
+        .toggle a {
+            color: #3b82f6;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .toggle a:hover {
+            text-decoration: underline;
+        }
+
+        .error {
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="auth-container">
+        <!-- Sign In Form -->
+        <div id="signin-form">
+            <h2>Sign In</h2>
+            <form onsubmit="handleSignIn(event)">
+                <div class="form-group">
+                    <label for="signin-email">Email</label>
+                    <input type="email" id="signin-email" required>
+                    <div class="error" id="signin-email-error">Please enter a valid email.</div>
+                </div>
+                <div class="form-group">
+                    <label for="signin-password">Password</label>
+                    <input type="password" id="signin-password" required>
+                    <div class="error" id="signin-password-error">Password cannot be empty.</div>
+                </div>
+                <button type="submit" class="btn">Sign In</button>
+            </form>
+            <div class="social-login">
+                <button class="social-btn" onclick="handleGoogleLogin()">
+                    <img src="https://www.google.com/favicon.ico" alt="Google" width="20">
+                    Google
+                </button>
+                <button class="social-btn" onclick="handleGitHubLogin()">
+                    <img src="https://github.com/favicon.ico" alt="GitHub" width="20">
+                    GitHub
+                </button>
+            </div>
+            <div class="toggle">
+                Don't have an account? <a onclick="showSignUp()">Sign Up</a>
+            </div>
+        </div>
+
+        <!-- Sign Up Form -->
+        <div id="signup-form" style="display: none;">
+            <h2>Sign Up</h2>
+            <form onsubmit="handleSignUp(event)">
+                <div class="form-group">
+                    <label for="signup-firstname">First Name</label>
+                    <input type="text" id="signup-firstname" required>
+                    <div class="error" id="signup-firstname-error">First name cannot be empty.</div>
+                </div>
+                <div class="form-group">
+                    <label for="signup-lastname">Last Name</label>
+                    <input type="text" id="signup-lastname" required>
+                    <div class="error" id="signup-lastname-error">Last name cannot be empty.</div>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" required>
+                    <div class="error" id="signup-email-error">Please enter a valid email.</div>
+                </div>
+                <div class="form-group">
+                    <label for="signup-confirm-email">Confirm Email</label>
+                    <input type="email" id="signup-confirm-email" required>
+                    <div class="error" id="signup-confirm-email-error">Emails do not match.</div>
+                </div>
+                <div class="form-group">
+                    <label for="signup-phone">Phone Number</label>
+                    <input type="tel" id="signup-phone" required>
+                    <div class="error" id="signup-phone-error">Please enter a valid phone number.</div>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" required pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$">
+                    <div class="error" id="signup-password-error">Password must be at least 8 characters, including a letter, number, and special character.</div>
+                </div>
+                <button type="submit" class="btn">Sign Up</button>
+            </form>
+            <div class="social-login">
+                <button class="social-btn" onclick="handleGoogleLogin()">
+                    <img src="https://www.google.com/favicon.ico" alt="Google" width="20">
+                    Google
+                </button>
+                <button class="social-btn" onclick="handleGitHubLogin()">
+                    <img src="https://github.com/favicon.ico" alt="GitHub" width="20">
+                    GitHub
+                </button>
+            </div>
+            <div class="toggle">
+                Already have an account? <a onclick="showSignIn()">Sign In</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSignUp() {
+            document.getElementById('signin-form').style.display = 'none';
+            document.getElementById('signup-form').style.display = 'block';
+        }
+
+        function showSignIn() {
+            document.getElementById('signup-form').style.display = 'none';
+            document.getElementById('signin-form').style.display = 'block';
+        }
+
+        function validateEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function validatePhone(phone) {
+            return /^\+?[\d\s-]{10,}$/.test(phone);
+        }
+
+        function showError(elementId, show) {
+            document.getElementById(elementId).style.display = show ? 'block' : 'none';
+        }
+
+        function handleSignIn(event) {
+            event.preventDefault();
+            const email = document.getElementById('signin-email').value;
+            const password = document.getElementById('signin-password').value;
+
+            let valid = true;
+            showError('signin-email-error', !validateEmail(email));
+            showError('signin-password-error', !password);
+            if (!validateEmail(email) || !password) valid = false;
+
+            if (valid) {
+                alert('Sign In successful! (This is a demo)');
+                // Add your sign-in logic here (e.g., API call)
+            }
+        }
+
+        function handleSignUp(event) {
+            event.preventDefault();
+            const firstname = document.getElementById('signup-firstname').value;
+            const lastname = document.getElementById('signup-lastname').value;
+            const email = document.getElementById('signup-email').value;
+            const confirmEmail = document.getElementById('signup-confirm-email').value;
+            const phone = document.getElementById('signup-phone').value;
+            const password = document.getElementById('signup-password').value;
+
+            let valid = true;
+            showError('signup-firstname-error', !firstname);
+            showError('signup-lastname-error', !lastname);
+            showError('signup-email-error', !validateEmail(email));
+            showError('signup-confirm-email-error', email !== confirmEmail);
+            showError('signup-phone-error', !validatePhone(phone));
+            showError('signup-password-error', !/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(password));
+
+            if (!firstname || !lastname || !validateEmail(email) || email !== confirmEmail || !validatePhone(phone) || !/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(password)) {
+                valid = false;
+            }
+
+            if (valid) {
+                alert('Sign Up successful! (This is a demo)');
+                // Add your sign-up logic here (e.g., API call)
+            }
+        }
+
+        function handleGoogleLogin() {
+            alert('Google login clicked! (Implement OAuth here)');
+            // Add Google OAuth logic here
+        }
+
+        function handleGitHubLogin() {
+            alert('GitHub login clicked! (Implement OAuth here)');
+            // Add GitHub OAuth logic here
+        }
+    </script>
+</body>
+</html>
