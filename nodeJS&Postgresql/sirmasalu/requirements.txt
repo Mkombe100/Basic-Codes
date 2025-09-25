@@ -1,0 +1,4 @@
+mkdir project
+cd project
+npm init -y
+npm install express pg bcryptjs jsonwebtoken dotenv
