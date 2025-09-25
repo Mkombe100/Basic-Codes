@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .major123 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            max-width: 900px;
+            margin: 1rem;
+            border: 2px solid #080707;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .Pic123 {
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .Pic123 img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .frame {
+            padding: 1.5rem;
+            background-color: rgba(86, 99, 103, 0.97);
+            border-radius: 8px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .frame h1 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1.8rem;
+            color: rgb(245, 116, 81);
+            margin-bottom: 1rem;
+        }
+        .register, .login {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            justify-content: center;
+        }
+        .field {
+            flex: 1 1 100%;
+            max-width: 300px;
+            padding: 0.4rem;
+        }
+        .field label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            color: #fff;
+            text-align: left;
+        }
+        .IN123 {
+            width: 100%;
+            height: 35px;
+            padding: 0.4rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: border-color 0.3s;
+        }
+        .IN123:focus {
+            border-color: rgb(245, 116, 81);
+            outline: none;
+        }
+        button {
+            background-color: #28a745;
+            border: 1px solid #1e7e34;
+            border-radius: 8px;
+            padding: 0.6rem 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 0.8rem 0;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .A123 {
+            font-family: sans-serif;
+            color: #fff;
+            font-style: italic;
+            font-weight: bold;
+            margin: 0;
+        }
+        .toggle-form {
+            color: rgb(245, 116, 81);
+            cursor: pointer;
+            text-decoration: underline;
+            margin-top: 0.8rem;
+            font-size: 0.9rem;
+        }
+        .toggle-form:hover {
+            color: #fff;
+        }
+        @media (max-width: 768px) {
+            .major123 {
+                grid-template-columns: 1fr;
+                margin: 0.5rem;
+            }
+            .Pic123 {
+                display: none;
+            }
+            .frame {
+                padding: 1rem;
+                border: none;
+            }
+            .frame h1 {
+                font-size: 1.4rem;
+            }
+            .IN123 {
+                height: 32px;
+                font-size: 0.85rem;
+            }
+            .field {
+                max-width: 100%;
+            }
+            button {
+                padding: 0.5rem 1rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .frame h1 {
+                font-size: 1.2rem;
+            }
+            .IN123 {
+                height: 30px;
+                font-size: 0.8rem;
+            }
+            .field label {
+                font-size: 0.9rem;
+            }
+            button {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            .toggle-form {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="major123">
+        <div class="Pic123">
+            <img src="download.jpg" alt="qwerty">
+        </div>
+        <div class="frame">
+            <div id="register-form">
+                <h1>Sign up here</h1>
+                <form action="/register" class="register">
+                    <div class="field"><label for="firstname">First Name</label><input type="text" id="firstname" placeholder="First name" class="IN123"></div>
+                    <div class="field"><label for="lastname">Last Name</label><input type="text" id="lastname" placeholder="Last name" class="IN123"></div>
+                    <div class="field"><label for="email">Email</label><input type="email" id="email" placeholder="example@gmail.com" class="IN123"></div>
+                    <div class="field"><label for="phonenumber">Phone Number</label><input type="text" id="phonenumber" placeholder="+255XXXXXXX" class="IN123"></div>
+                    <div class="field"><label for="address">Address</label><input type="text" id="address" placeholder="Enter your city" class="IN123"></div>
+                    <div class="field"><label for="age">Age</label><input type="text" id="age" placeholder="Enter age" class="IN123"></div>
+                    <div class="field"><label for="gender">Gender</label><input type="text" id="gender" placeholder="Enter gender" class="IN123"></div>
+                    <div class="field"><label for="password">Password</label><input type="password" id="password" placeholder="Enter password" class="IN123"></div>
+                    <button type="submit"><p class="A123">Create Account</p></button>
+                </form>
+                <p class="toggle-form" onclick="toggleForm('login')">Already have an account? Log in</p>
+            </div>
+            <div id="login-form" style="display: none;">
+                <h1>Log in here</h1>
+                <form action="/login" class="login">
+                    <div class="field"><label for="login-email">Email</label><input type="email" id="login-email" placeholder="example@gmail.com" class="IN123"></div>
+                    <div class="field"><label for="login-password">Password</label><input type="password" id="login-password" placeholder="Enter password" class="IN123"></div>
+                    <button type="submit"><p class="A123">Log In</p></button>
+                </form>
+                <p class="toggle-form" onclick="toggleForm('register')">Don't have an account? Sign up</p>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+            return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+            if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+                try {
+                    var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                    var firstSheetName = workbook.SheetNames[0];
+                    var worksheet = workbook.Sheets[firstSheetName];
+                    var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                    var filteredData = jsonData.filter(row => row.some(filledCell));
+                    var headerRowIndex = filteredData.findIndex((row, index) =>
+                        row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                    );
+                    if (headerRowIndex === -1 || headerRowIndex > 25) {
+                        headerRowIndex = 0;
+                    }
+                    var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex));
+                    csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                    return csv;
+                } catch (e) {
+                    console.error(e);
+                    return "";
+                }
+            }
+            return gk_fileData[filename] || "";
+        }
+        function toggleForm(formType) {
+            document.getElementById('register-form').style.display = formType === 'register' ? 'block' : 'none';
+            document.getElementById('login-form').style.display = formType === 'login' ? 'block' : 'none';
+        }
+  
+  function toggleForm(formType) {
+    document.getElementById('register-form').style.display = formType === 'register' ? 'block' : 'none';
+    document.getElementById('login-form').style.display = formType === 'login' ? 'block' : 'none';
+  }
+
+  // Handle registration form submission
+  document.querySelector('.register').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+
+    try {
+      const response = await fetch('/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+      alert(result.message);
+      if (response.ok) {
+        toggleForm('login');
+      }
+    } catch (error) {
+      alert('Error during registration');
+    }
+  });
+
+  // Handle login form submission
+  document.querySelector('.login').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+
+    try {
+      const response = await fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+      alert(result.message);
+      if (response.ok) {
+        localStorage.setItem('token', result.token);
+        const redirectUrl = result.role === 'instructor' ? '/dash' : '/stud_dash';
+        window.location.href = redirectUrl;
+      }
+    } catch (error) {
+      alert('Error during login');
+    }
+  });
+  
+    </script>
+</body>
+</html>
